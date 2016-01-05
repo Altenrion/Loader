@@ -2,7 +2,7 @@
 
 ##  What is a Loader ? 
  
-### This is a module for auto loading Js & css files dynamically. 
+### This is a component for auto loading Js & css files dynamically. 
  You can ask for what. So the profit is : 
  
  1. no huge arrays in avery action  
