@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Loader : Kohana 3.3, Loader, php5">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Loader</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Altenrion/Loader">View on GitHub</a>
+
+          <h1 id="project_title">Loader</h1>
+          <h2 id="project_tagline">Kohana 3.3, Loader, php5</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Altenrion/Loader/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Altenrion/Loader/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="loader" class="anchor" href="#loader" aria-hidden="true"><span class="octicon octicon-link"></span></a>Loader</h1>
+
+<h2>
+<a id="what-is-a-loader-" class="anchor" href="#what-is-a-loader-" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is a Loader ?</h2>
+
+<h3>
+<a id="this-is-a-module-for-auto-loading-js--css-files-dynamically" class="anchor" href="#this-is-a-module-for-auto-loading-js--css-files-dynamically" aria-hidden="true"><span class="octicon octicon-link"></span></a>This is a module for auto loading Js &amp; css files dynamically.</h3>
+
+<p>You can ask for what. So the profit is : </p>
+
+<ol>
+<li>no huge arrays in avery action<br>
+</li>
+<li>load only those files that you are interested in. </li>
+<li>loading files with dependencies, without duplication, even 
+if those files were already loaded. </li>
+<li>call for files in widget, action, view, or where ever you can =) </li>
+<li>load js files in footer or header only changing 1 flag =) !!! </li>
+</ol>
+
+<h2>
+<a id="prepare-the-loader" class="anchor" href="#prepare-the-loader" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prepare the Loader</h2>
+
+<ol>
+<li>place event.php from this package, or kohana 2.4 to application/classes/ </li>
+<li>place loader.php in /application/classes/ directory </li>
+<li>
+<p>modify your base controller after() method like this: </p>
+
+<blockquote>
+<p>public function after(){</p>
+
+<p>parent::after(); 
+   Event::add('system.display', array('Loader', 'load_files')); </p>
+
+<p>}  </p>
+</blockquote>
+</li>
+<li><p>modify index.php (move execute() to bootstrap.php) </p></li>
+<li>
+<p>modify bootstrap.php like this : </p>
+
+<blockquote>
+<p>$req = Request::factory()-&gt;execute()-&gt;send_headers()-&gt;body();</p>
+
+<p>Event::run('system.display', $req);  <br> </p>
+
+<p>echo $req;  <br> </p>
+</blockquote>
+</li>
+</ol>
+
+<p>now all should work! =) </p>
+
+<h2>
+<a id="using-the-loader" class="anchor" href="#using-the-loader" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the Loader</h2>
+
+<p>All of the methods defined by the Loader class are static, there is 
+no need to instantiate the class as an object. </p>
+
+<h2>
+<a id="usage-examples" class="anchor" href="#usage-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage Examples</h2>
+
+<h4>
+<a id="simple-loading-css-to-head" class="anchor" href="#simple-loading-css-to-head" aria-hidden="true"><span class="octicon octicon-link"></span></a>simple loading css to head</h4>
+
+<p>Loader::load_css($files_css); </p>
+
+<h4>
+<a id="simple-loding-js-to-head-of-layout" class="anchor" href="#simple-loding-js-to-head-of-layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>simple loding js to head of layout</h4>
+
+<p>Loader::load_js($files_js, Loader::POS_HEADER); </p>
+
+<h4>
+<a id="simple-loding-js-to-footer-of-layout" class="anchor" href="#simple-loding-js-to-footer-of-layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>simple loding js to footer of layout</h4>
+
+<p>Loader::load_js($files_js, Loader::POS_FOOTER); </p>
+
+<h4>
+<a id="loding-js-to-head-of-footer-of-layout-with-loading-dependencies" class="anchor" href="#loding-js-to-head-of-footer-of-layout-with-loading-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>loding js to head of footer of layout, with loading dependencies</h4>
+
+<p>Loader::load_js($file, $position, true)-&gt;depends(array('jquery'))-&gt;init(); </p>
+
+<p>Loader::load_js(array_of_files, Loader::POS_FOOTER, true) 
+    -&gt;depends(array('jquery','ckeditor'))-&gt;init(); </p>
+
+<h4>
+<a id="simple-loding-dependencies-for-some-needsnot-for-outgoing-usage" class="anchor" href="#simple-loding-dependencies-for-some-needsnot-for-outgoing-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>simple loding dependencies for some needs(not for outgoing usage)</h4>
+
+<p>Loader::load_dependencies(); </p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Loader maintained by <a href="https://github.com/Altenrion">Altenrion</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-57428258-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
