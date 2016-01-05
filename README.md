@@ -25,8 +25,22 @@
     
     >}  
 
-4. modify index.php (move execute() to bootstrap.php) 
-5. modify bootstrap.php like this : 
+4. Create dependencies config in application/config/dependencies.php like this : 
+
+    >return array(
+     
+     >'jquery' => array(
+      
+      >'name' => 'jquery',
+      
+      >'js' => array('media/js/plugins/jquery-1.8.3.min.js'),
+      
+      >'css' => array('media/css/jquery.min.css'),
+    
+    >));
+
+5. modify index.php (move execute() to bootstrap.php) 
+ modify bootstrap.php like this : 
 
     >$req = Request::factory()->execute()->send_headers()->body();
     
