@@ -70,9 +70,26 @@ if those files were already loaded. </li>
 <p>}  </p>
 </blockquote>
 </li>
-<li><p>modify index.php (move execute() to bootstrap.php) </p></li>
 <li>
-<p>modify bootstrap.php like this : </p>
+<p>Create dependencies config in application/config/dependencies.php like this : </p>
+
+<blockquote>
+<p>return array(</p>
+
+<p>'jquery' =&gt; array(</p>
+
+<p>'name' =&gt; 'jquery',</p>
+
+<p>'js' =&gt; array('media/js/plugins/jquery-1.8.3.min.js'),</p>
+
+<p>'css' =&gt; array('media/css/jquery.min.css'),</p>
+
+<p>));</p>
+</blockquote>
+</li>
+<li>
+<p>modify index.php (move execute() to bootstrap.php) 
+modify bootstrap.php like this : </p>
 
 <blockquote>
 <p>$req = Request::factory()-&gt;execute()-&gt;send_headers()-&gt;body();</p>
