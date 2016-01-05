@@ -18,18 +18,21 @@
 2. place loader.php in /application/classes/ directory 
 3. modify your base controller after() method like this: 
 
-    public function after() 
-    { 
-        parent::after(); 
-        Event::add('system.display', array('Loader', 'load_files')); 
-    }  
+    >public function after(){
+    
+       >parent::after(); </br>
+       Event::add('system.display', array('Loader', 'load_files')); 
+    
+    >}  
 
 4. modify index.php (move execute() to bootstrap.php) 
 5. modify bootstrap.php like this : 
 
-    $req = Request::factory()->execute()->send_headers()->body(); <br/>  
-    Event::run('system.display', $req);  <br/> 
-    echo $req;  <br/> 
+    >$req = Request::factory()->execute()->send_headers()->body();
+    
+    >Event::run('system.display', $req);  <br/> 
+    
+    >echo $req;  <br/> 
  
 now all should work! =) 
 
