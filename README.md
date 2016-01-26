@@ -19,7 +19,7 @@
 3. modify your base controller after() method like this: 
  ```
  public function after(){
-     parent::after(); </br>
+     parent::after();
      Event::add('system.display', array('Loader', 'load_files')); 
  }  
  ```
