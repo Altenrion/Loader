@@ -39,8 +39,8 @@
  modify bootstrap.php like this : 
  ```
  $req = Request::factory()->execute()->send_headers()->body();
- Event::run('system.display', $req);  <br/> 
- echo $req;  <br/> 
+ Event::run('system.display', $req);  
+ echo $req;  
  ``` 
  
 now all should work! =) 
